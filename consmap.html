@@ -31,30 +31,30 @@
                 <h6 class="card-title">Enter the details of Identified QTL</h6>
                   <div class="row">
                       <div class="col-sm">
-                          <label for="IdeLG">Linkage Group:</label><br>
-                          <input type="number" id="IdeLG" placeholder="1">
+                          <label for="ipos">Position (bp):</label><br>
+                          <input type="number" id="ipos" placeholder="1">
                       </div>
                       <div class="col-sm">
-                          <label for="IdePos">Position(bp):</label><br>
-                          <input type="number" id="IdePos" placeholder="1">
+                          <label for="irr">Recombination rate:</label><br>
+                          <input type="number" id="irr" placeholder="1">
                       </div>
                   </div>
                   <hr>
                   <h6 class="card-title">Enter the details of Selected QTL</h6>
                   <div class="row">
                       <div class="col-sm">
-                          <label for="sLG">Linkage Group:</label><br>
-                          <input type="number" id="sLG" placeholder="1">
+                          <label for="spos">Position (bp):</label><br>
+                          <input type="number" id="spos" placeholder="1">
                       </div>
                       <div class="col-sm">
-                          <label for="sPos">Position(bp):</label><br>
-                          <input type="number" id="sPos" placeholder="1">
+                          <label for="srr">Recombination rate:</label><br>
+                          <input type="number" id="srr" placeholder="1">
                       </div>
                   </div>
                   <hr>
                   <div class="row">
                       <div class="col-sm">
-                          <a href="#" class="btn btn-primary">Compute p-value</a>
+                          <input id="computepvalue" type="button" class="btn btn-primary" value="Compute p-value" onclick="computepval()" />
                       </div>
                   </div>
               </div>
@@ -77,5 +77,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <script src="./js/bootstrap.js"></script>
+    <script src="./js/compute_p_val.js"></script>
   </body>
 </html>
