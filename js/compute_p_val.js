@@ -18,7 +18,7 @@ function computepval(){
     let rr = (parseFloat(irr) + parseFloat(srr))/2;
     let sigma = Math.pow(10,(alpha+beta*rr));
     let dif = Math.abs((parseFloat(ipos)/1000000)-(parseFloat(spos)/1000000));
-    let phi_func = dif/Math.sqrt(2*sigma);
+    let phi_func = dif/(Math.sqrt(2)*sigma);
     let pval = 2*(1-zscorecal(phi_func));
     document.getElementById("pval").innerHTML = pval;
     console.log("P value", pval);
