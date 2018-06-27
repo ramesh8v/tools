@@ -16,8 +16,8 @@ function computepval(){
     let ipos = document.getElementById("ipos").value;
     let spos = document.getElementById("spos").value;
     console.log("values", irr, srr,ipos, spos);
-    let rr = (parseFloat(irr) + parseFloat(srr))/2;
-    let sigma = Math.pow((alpha+beta*rr), 2);
+    let rr = ((parseFloat(irr)/1000000) + (parseFloat(srr)/1000000))/2;
+    let sigma = Math.pow(10,(alpha+beta*rr));
     let dif = Math.abs(parseFloat(ipos)-parseFloat(spos));
     let phi_func = dif/Math.sqrt(2*sigma);
     console.log("Phi value", rr, sigma, dif, phi_func);
