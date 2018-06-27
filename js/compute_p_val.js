@@ -15,12 +15,10 @@ function computepval(){
     let srr = document.getElementById("srr").value;
     let ipos = document.getElementById("ipos").value;
     let spos = document.getElementById("spos").value;
-    console.log("values", irr, srr,ipos, spos);
-    let rr = ((parseFloat(irr)/1000000) + (parseFloat(srr)/1000000))/2;
+    let rr = (parseFloat(irr) + parseFloat(srr))/2;
     let sigma = Math.pow(10,(alpha+beta*rr));
-    let dif = Math.abs(parseFloat(ipos)-parseFloat(spos));
+    let dif = Math.abs((parseFloat(ipos)/1000000)-(parseFloat(spos)/1000000));
     let phi_func = dif/Math.sqrt(2*sigma);
-    console.log("Phi value", rr, sigma, dif, phi_func);
     let pval = 2*(1-zscorecal(phi_func));
     document.getElementById("pval").innerHTML = pval;
     console.log("P value", pval);
