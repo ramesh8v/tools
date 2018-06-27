@@ -32,11 +32,11 @@
                   <div class="row">
                       <div class="col-sm">
                           <label for="ipos">Position (bp):</label><br>
-                          <input type="number" id="ipos" placeholder="1">
+                          <input type="number" id="ipos" placeholder=0>
                       </div>
                       <div class="col-sm">
                           <label for="irr">Recombination rate:</label><br>
-                          <input type="number" id="irr" placeholder="1">
+                          <input type="number" id="irr" placeholder=0>
                       </div>
                   </div>
                   <hr>
@@ -44,17 +44,24 @@
                   <div class="row">
                       <div class="col-sm">
                           <label for="spos">Position (bp):</label><br>
-                          <input type="number" id="spos" placeholder="1">
+                          <input type="number" id="spos" placeholder=0>
                       </div>
                       <div class="col-sm">
                           <label for="srr">Recombination rate:</label><br>
-                          <input type="number" id="srr" placeholder="1">
+                          <input type="number" id="srr" placeholder=0>
                       </div>
                   </div>
                   <hr>
                   <div class="row">
                       <div class="col-sm">
                           <input id="computepvalue" type="button" class="btn btn-primary" value="Compute p-value" onclick="computepval()" />
+                      </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                      <div class="col-sm">
+                          <p>p-value:</p>
+                          <p id="pval"></p>
                       </div>
                   </div>
               </div>
@@ -77,6 +84,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <script src="./js/bootstrap.js"></script>
+    <script src="ztable/index.js"></script>
     <script src="./js/compute_p_val.js"></script>
   </body>
 </html>
