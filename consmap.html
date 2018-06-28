@@ -31,11 +31,36 @@
                 <h6 class="card-title">Enter the details of Identified QTL</h6>
                   <div class="row">
                       <div class="col-sm">
+                          <div class="form-group">
+                              <label for="chri">Select a chromosome</label>
+                              <select class="form-control chri" id="chri">
+                                <option>1S</option>
+                                <option>1L</option>
+                                <option>2S</option>
+                                <option>2L</option>
+                                <option>3S</option>
+                                <option>3L</option>
+                                <option>4S</option>
+                                <option>4L</option>
+                                <option>5S</option>
+                                <option>5L</option>
+                                <option>6S</option>
+                                <option>6L</option>
+                                <option>7S</option>
+                                <option>7L</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="col-sm">
                           <label for="ipos">Position (bp):</label><br>
                           <input type="number" id="ipos" placeholder=0>
                       </div>
                       <div class="col-sm">
-                          <label for="irr">Recombination rate:</label><br>
+                          <label for="ipos">Click to fetch Rt:</label><br>
+                          <input id="fetchirt" type="button" class="btn btn-default" value="Fetch Rt" onclick="fetchrti()" />
+                      </div>
+                      <div class="col-sm">
+                          <label for="irr">Recombination rate (Rt):</label><br>
                           <input type="number" id="irr" placeholder=0>
                       </div>
                   </div>
@@ -43,8 +68,33 @@
                   <h6 class="card-title">Enter the details of Selected QTL</h6>
                   <div class="row">
                       <div class="col-sm">
+                          <div class="form-group">
+                              <label for="chrs">Select a chromosome</label>
+                              <select class="form-control" id="chrs">
+                                <option>1S</option>
+                                <option>1L</option>
+                                <option>2S</option>
+                                <option>2L</option>
+                                <option>3S</option>
+                                <option>3L</option>
+                                <option>4S</option>
+                                <option>4L</option>
+                                <option>5S</option>
+                                <option>5L</option>
+                                <option>6S</option>
+                                <option>6L</option>
+                                <option>7S</option>
+                                <option>7L</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="col-sm">
                           <label for="spos">Position (bp):</label><br>
                           <input type="number" id="spos" placeholder=0>
+                      </div>
+                      <div class="col-sm">
+                          <label for="ipos">Click to fetch Rt:</label><br>
+                          <input id="fetchirt_s" type="button" class="btn btn-default" value="Fetch Rt" onclick="fetchrts()" />
                       </div>
                       <div class="col-sm">
                           <label for="srr">Recombination rate:</label><br>
@@ -84,6 +134,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <script src="./js/bootstrap.js"></script>
+    <script src="./js/poly_scores.js"></script>
     <script src="./js/ztab.js"></script>
     <script src="./js/compute_p_val.js"></script>
   </body>

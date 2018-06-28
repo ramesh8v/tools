@@ -1,16 +1,19 @@
 const alpha = 3.656;
 const beta = 1.089;
-const z_table = {'-3.4':0.003, "-3.3":0.005, "-3.2":0.007, "-3.1":0.0010,
-                 "-3.0": 0.0013, "-2.9":0.0019, "-2.8":0.0026, "-2.7":0.0035, "-2.6":0.0047,
-                 "-2.5":0.0062, "-2.4":0.0082, "-2.3":0.0107, "-2.2": 0.139, "-2.1":0.0179,
-                 "-2.0":0.0228, "-1.9":0.0287, "-1.8":0.0359, "-1.7":0.0446, "-1.6":0.0548,
-                 "-1.5":0.0668, "-1.4":0.0808, "-1.3":0.0968, "-1.2":0.1151, "-1.1":0.1357,
-                 "-1.0":0.1587, "-0.9":0.1841, "-0.8":0.2119, "-0.7":0.2420, "-0.6":0.2743,
-                 "-0.5":0.3085 ,"0.4":0.3446, "0.3":0.3821, "0.2":0.4207, "0.1":0.4602,
-                 "0.0":0.5000
-                    };
+
+/// Change selected chromosome name based on identified chromosome name
+$("#chri").change(function () {
+      document.getElementById("chrs").value = document.getElementById("chri").value;
+  })
+  .change();
+/// Change identified chromosome name based on selected chromosome name
+$("#chrs").change(function () {
+      document.getElementById("chri").value = document.getElementById("chrs").value;
+  })
+  .change();
+
+//function to calculate p value as explained in the paper
 function computepval(){
-    console.log("running");
     let irr = document.getElementById("irr").value;
     let srr = document.getElementById("srr").value;
     let ipos = document.getElementById("ipos").value;
@@ -21,5 +24,44 @@ function computepval(){
     let phi_func = dif/(Math.sqrt(2)*sigma);
     let pval = 2*(1-zscorecal(phi_func));
     document.getElementById("pval").innerHTML = pval;
-    console.log("P value", pval);
+}
+
+// function to fetch recombination rate identified QTL
+function fetchrti(){
+    let chr = document.getElementById("chri").value;
+    let pos = parseFloat(document.getElementById("ipos").value);
+    console.log(chr, pos);
+    let poly_val = polys[chr];
+    let poly_out = 0;
+    console.log(poly_val);
+    for (i=0;i<poly_val.length;i++){
+        let s  = poly_val.length - (i+1);
+        let temp = poly_val[i]*Math.pow(pos,s);
+        poly_out = poly_out+temp
+    }
+    console.log(poly_out);
+    if (poly_out<0){
+        poly_out = 0;
+    }
+    document.getElementById("irr").value = poly_out;
+}
+
+// function to fetch recombination rate selected QTL
+function fetchrts(){
+    let chr = document.getElementById("chrs").value;
+    let pos = parseFloat(document.getElementById("spos").value);
+    console.log(chr, pos);
+    let poly_val = polys[chr];
+    let poly_out = 0;
+    console.log(poly_val);
+    for (i=0;i<poly_val.length;i++){
+        let s  = poly_val.length - (i+1);
+        let temp = poly_val[i]*Math.pow(pos,s);
+        poly_out = poly_out+temp
+    }
+    console.log(poly_out);
+    if (poly_out<0){
+        poly_out = 0;
+    }
+    document.getElementById("srr").value = poly_out;
 }
