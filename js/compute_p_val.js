@@ -1,6 +1,9 @@
 const alpha = 3.656;
 const beta = 1.089;
-
+/// Start of chromosome arms
+const st = {'1S':0, '1L':160000000, '2S':0, '2L':233500000, '3S':0, '3L':220000000, '4S':0, '4L':187000000, '5S':0, '5L':170000000, '6S':0, '6L':212500000, '7S':0, '7L':306500000 };
+// End of Chromosme arms
+const ed = {'1S':160000000, '1L':502310573, '2S':233500000, '2L':651642770, '3S':220000000, '3L':627112410, '4S':187000000, '4L':525901714, '5S':170000000, '5L':577254575, '6S':212500000, '6L':495946541, '7S':306500000, '7L':644563824};
 /// Change selected chromosome name based on identified chromosome name
 $("#chri").change(function () {
       document.getElementById("chrs").value = document.getElementById("chri").value;
@@ -30,38 +33,48 @@ function computepval(){
 function fetchrti(){
     let chr = document.getElementById("chri").value;
     let pos = parseFloat(document.getElementById("ipos").value);
-    console.log(chr, pos);
     let poly_val = polys[chr];
     let poly_out = 0;
-    console.log(poly_val);
-    for (i=0;i<poly_val.length;i++){
+    // Check enetred position is correct or not
+    if ((pos>st[chr]) && (pos<ed[chr])){
+        document.getElementById("i_error").innerText = "";
+        for (i=0;i<poly_val.length;i++){
         let s  = poly_val.length - (i+1);
         let temp = poly_val[i]*Math.pow(pos,s);
         poly_out = poly_out+temp
+        }
+        console.log(poly_out);
+        if (poly_out<0){
+            poly_out = 0;
+        }
+        document.getElementById("irr").value = poly_out;
+        }
+        else{
+        document.getElementById("i_error").innerText = "Wrong position given";
     }
-    console.log(poly_out);
-    if (poly_out<0){
-        poly_out = 0;
-    }
-    document.getElementById("irr").value = poly_out;
+
 }
 
 // function to fetch recombination rate selected QTL
 function fetchrts(){
     let chr = document.getElementById("chrs").value;
     let pos = parseFloat(document.getElementById("spos").value);
-    console.log(chr, pos);
     let poly_val = polys[chr];
     let poly_out = 0;
-    console.log(poly_val);
-    for (i=0;i<poly_val.length;i++){
-        let s  = poly_val.length - (i+1);
-        let temp = poly_val[i]*Math.pow(pos,s);
-        poly_out = poly_out+temp
+    if ((pos>st[chr]) && (pos<ed[chr])) {
+         document.getElementById("s_error").innerText = "";
+        for (i = 0; i < poly_val.length; i++) {
+            let s = poly_val.length - (i + 1);
+            let temp = poly_val[i] * Math.pow(pos, s);
+            poly_out = poly_out + temp
+        }
+        console.log(poly_out);
+        if (poly_out < 0) {
+            poly_out = 0;
+        }
+        document.getElementById("srr").value = poly_out;
     }
-    console.log(poly_out);
-    if (poly_out<0){
-        poly_out = 0;
+    else{
+        document.getElementById("s_error").innerText = "Wrong position given";
     }
-    document.getElementById("srr").value = poly_out;
 }
