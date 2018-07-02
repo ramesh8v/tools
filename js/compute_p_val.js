@@ -6,12 +6,12 @@ document.getElementById("spos").value = 1;
 // Size of chromosomes
 const chrSize = {'Chr1':502310573, 'Chr2':651642770, 'Chr3':627112410, 'Chr4':525901714, 'Chr5':577254575, 'Chr6':495946541, 'Chr7':644563824};
 
-/// Change selected chromosome name based on identified chromosome name
+// Change selected chromosome name based on identified chromosome name
 $("#chri").change(function () {
       document.getElementById("chrs").value = document.getElementById("chri").value;
   })
   .change();
-/// Change identified chromosome name based on selected chromosome name
+// Change identified chromosome name based on selected chromosome name
 $("#chrs").change(function () {
       document.getElementById("chri").value = document.getElementById("chrs").value;
   })
@@ -61,12 +61,11 @@ function getRrArray(){
 // Calculates Sigma from the array from getRrArray function
 function calculateSigma(aray){
     if (aray.length === 1){
-        return alpha + (beta * aray[0])
+        return Math.exp(alpha + (beta * aray[0]))
     } else{
         let sigma_aray = []; //array to store sigma values
-        for (i=1; i<aray.length; i++){
-            let meanRr = (aray[0]+aray[i])/2;
-            sigma_aray.push(alpha + (beta * meanRr));
+        for (i=0; i<aray.length; i++){
+            sigma_aray.push(Math.exp(alpha + (beta * aray[i])));
         }
         let sigma_total = 0;
         for (i=0; i<sigma_aray.length; i++){ //calculating mean value for the sigma array
@@ -88,10 +87,10 @@ function computepval(){
         const rr_array = getRrArray();
         console.log("aray", rr_array);
         const temp = calculateSigma(rr_array);
-        let sigma = Math.exp(temp);
-        console.log("sigma", sigma);
+        //let sigma = Math.exp(temp);
+        console.log("sigma", temp);
         let dif = Math.abs((parseFloat(ipos) / 1000000) - (parseFloat(spos) / 1000000));
-        let phi_func = dif / (Math.sqrt(2) * sigma);
+        let phi_func = dif / (Math.sqrt(2) * temp);
         console.log("phifunc", phi_func);
         let pval = 2 * (1 - zscorecal(phi_func));
         console.log("p-value", pval);
