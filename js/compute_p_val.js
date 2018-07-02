@@ -1,5 +1,5 @@
 const alpha = 3.656;
-const beta = 1.089;
+const beta = -1.089;
 document.getElementById("ipos").value = 1;
 document.getElementById("spos").value = 1;
 
