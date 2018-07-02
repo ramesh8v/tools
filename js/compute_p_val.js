@@ -1,9 +1,11 @@
 const alpha = 3.656;
 const beta = 1.089;
-/// Start of chromosome arms
-const st = {'1S':0, '1L':160000000, '2S':0, '2L':233500000, '3S':0, '3L':220000000, '4S':0, '4L':187000000, '5S':0, '5L':170000000, '6S':0, '6L':212500000, '7S':0, '7L':306500000 };
-// End of Chromosme arms
-const ed = {'1S':160000000, '1L':502310573, '2S':233500000, '2L':651642770, '3S':220000000, '3L':627112410, '4S':187000000, '4L':525901714, '5S':170000000, '5L':577254575, '6S':212500000, '6L':495946541, '7S':306500000, '7L':644563824};
+document.getElementById("ipos").value = 1;
+document.getElementById("spos").value = 1;
+
+// Size of chromosomes
+const chrSize = {'Chr1':502310573, 'Chr2':651642770, 'Chr3':627112410, 'Chr4':525901714, 'Chr5':577254575, 'Chr6':495946541, 'Chr7':644563824};
+
 /// Change selected chromosome name based on identified chromosome name
 $("#chri").change(function () {
       document.getElementById("chrs").value = document.getElementById("chri").value;
@@ -15,66 +17,87 @@ $("#chrs").change(function () {
   })
   .change();
 
+
+// function to check weather user entered marker position is within the range or not
+function checkChrPositions(){
+    const chri = document.getElementById("chri").value;
+    const ipos = document.getElementById("ipos").value;
+    const spos = document.getElementById("spos").value;
+    if((ipos<=chrSize[chri]) && (spos<=chrSize[chri])){
+        return 'go';
+    } else {
+        return 'stop';
+    }
+}
+
+// function to get Recombination rates between two selected QTLs
+function getRrArray(){
+    const chri = document.getElementById("chri").value;
+    const ipos = document.getElementById("ipos").value;
+    const spos = document.getElementById("spos").value;
+    const chrdata = rr[chri];
+    const dist_i = [];  // array to hold absolute distance
+    const dist_s = [];
+    for(i=0;i<chrdata['Gene_start'].length;i++){
+        dist_i.push(Math.abs(chrdata['Gene_start'][i]-ipos));
+        dist_s.push(Math.abs(chrdata['Gene_start'][i]-spos));
+    }
+    const arrMin_i = Math.min.apply(null, dist_i); // get minimum of dist array
+    const arrMin_s = Math.min.apply(null, dist_s);
+    const arrMinPos_i = dist_i.indexOf(arrMin_i); // get the index of minimum
+    const arrMinPos_s = dist_s.indexOf(arrMin_s);
+    function getRrSlice(chrdata, arrMinPos_i, arrMinPos_s) {
+        if (arrMinPos_i === arrMinPos_s) {
+            return [chrdata['rr'][arrMinPos_i]];
+        } else if (arrMinPos_i < arrMinPos_s) {
+            return chrdata['rr'].slice(arrMinPos_i, arrMinPos_s);
+        } else {
+            return chrdata['rr'].slice(arrMinPos_s, arrMinPos_i);
+        }
+    }
+    return getRrSlice(chrdata, arrMinPos_i, arrMinPos_s);
+}
+
+// Calculates Sigma from the array from getRrArray function
+function calculateSigma(aray){
+    if (aray.length === 1){
+        return alpha + (beta * aray[0])
+    } else{
+        let sigma_aray = []; //array to store sigma values
+        for (i=1; i<aray.length; i++){
+            let meanRr = (aray[0]+aray[i])/2;
+            sigma_aray.push(alpha + (beta * meanRr));
+        }
+        let sigma_total = 0;
+        for (i=0; i<sigma_aray.length; i++){ //calculating mean value for the sigma array
+            sigma_total+=sigma_aray[i];
+        }
+        return sigma_total/sigma_aray.length;
+    }
+
+}
+
+
 //function to calculate p value as explained in the paper
 function computepval(){
-    let irr = document.getElementById("irr").value;
-    let srr = document.getElementById("srr").value;
+    let chr = document.getElementById("chri").value;
     let ipos = document.getElementById("ipos").value;
     let spos = document.getElementById("spos").value;
-    let rr = (parseFloat(irr) + parseFloat(srr))/2;
-    let sigma = Math.pow(10,(alpha+beta*rr));
-    let dif = Math.abs((parseFloat(ipos)/1000000)-(parseFloat(spos)/1000000));
-    let phi_func = dif/(Math.sqrt(2)*sigma);
-    let pval = 2*(1-zscorecal(phi_func));
-    document.getElementById("pval").innerHTML = pval;
-}
-
-// function to fetch recombination rate identified QTL
-function fetchrti(){
-    let chr = document.getElementById("chri").value;
-    let pos = parseFloat(document.getElementById("ipos").value);
-    let poly_val = polys[chr];
-    let poly_out = 0;
-    // Check enetred position is correct or not
-    if ((pos>st[chr]) && (pos<ed[chr])){
-        document.getElementById("i_error").innerText = "";
-        for (i=0;i<poly_val.length;i++){
-        let s  = poly_val.length - (i+1);
-        let temp = poly_val[i]*Math.pow(pos,s);
-        poly_out = poly_out+temp
-        }
-        console.log(poly_out);
-        if (poly_out<0){
-            poly_out = 0;
-        }
-        document.getElementById("irr").value = poly_out;
-        }
-        else{
-        document.getElementById("i_error").innerText = "Wrong position given";
+    console.log('Chr:', chr, 'Position_i:', ipos, "Position_s:", spos);
+    if (checkChrPositions() === 'go'){
+        const rr_array = getRrArray();
+        console.log("aray", rr_array);
+        const temp = calculateSigma(rr_array);
+        let sigma = Math.exp(temp);
+        console.log("sigma", sigma);
+        let dif = Math.abs((parseFloat(ipos) / 1000000) - (parseFloat(spos) / 1000000));
+        let phi_func = dif / (Math.sqrt(2) * sigma);
+        console.log("phifunc", phi_func);
+        let pval = 2 * (1 - zscorecal(phi_func));
+        console.log("p-value", pval);
+        document.getElementById("pval").innerHTML = pval;
+    } else{
+        document.getElementById("pval").innerHTML = "Wrong marker position entered";
     }
 
-}
-
-// function to fetch recombination rate selected QTL
-function fetchrts(){
-    let chr = document.getElementById("chrs").value;
-    let pos = parseFloat(document.getElementById("spos").value);
-    let poly_val = polys[chr];
-    let poly_out = 0;
-    if ((pos>st[chr]) && (pos<ed[chr])) {
-         document.getElementById("s_error").innerText = "";
-        for (i = 0; i < poly_val.length; i++) {
-            let s = poly_val.length - (i + 1);
-            let temp = poly_val[i] * Math.pow(pos, s);
-            poly_out = poly_out + temp
-        }
-        console.log(poly_out);
-        if (poly_out < 0) {
-            poly_out = 0;
-        }
-        document.getElementById("srr").value = poly_out;
-    }
-    else{
-        document.getElementById("s_error").innerText = "Wrong position given";
-    }
 }

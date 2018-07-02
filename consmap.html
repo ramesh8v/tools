@@ -34,34 +34,20 @@
                           <div class="form-group">
                               <label for="chri">Select a chromosome</label>
                               <select class="form-control chri" id="chri">
-                                <option>1S</option>
-                                <option>1L</option>
-                                <option>2S</option>
-                                <option>2L</option>
-                                <option>3S</option>
-                                <option>3L</option>
-                                <option>4S</option>
-                                <option>4L</option>
-                                <option>5S</option>
-                                <option>5L</option>
-                                <option>6S</option>
-                                <option>6L</option>
-                                <option>7S</option>
-                                <option>7L</option>
+                                <option>Chr1</option>
+                                <option>Chr2</option>
+                                <option>Chr3</option>
+                                <option>Chr4</option>
+                                <option>Chr5</option>
+                                <option>Chr6</option>
+                                <option>Chr7</option>
                               </select>
                           </div>
                       </div>
+                      <div class="col-sm"></div>
                       <div class="col-sm">
                           <label for="ipos">Position (bp):</label><br>
                           <input type="number" id="ipos" placeholder=0>
-                      </div>
-                      <div class="col-sm">
-                          <label for="ipos">Click to fetch Rt:</label><br>
-                          <input id="fetchirt" type="button" class="btn btn-default" value="Fetch Rt" onclick="fetchrti()" />
-                      </div>
-                      <div class="col-sm">
-                          <label for="irr">Recombination rate (Rt):</label><br>
-                          <input type="number" id="irr" placeholder=0>
                       </div>
                   </div>
                   <div class="row" >
@@ -74,34 +60,20 @@
                           <div class="form-group">
                               <label for="chrs">Select a chromosome</label>
                               <select class="form-control" id="chrs">
-                                <option>1S</option>
-                                <option>1L</option>
-                                <option>2S</option>
-                                <option>2L</option>
-                                <option>3S</option>
-                                <option>3L</option>
-                                <option>4S</option>
-                                <option>4L</option>
-                                <option>5S</option>
-                                <option>5L</option>
-                                <option>6S</option>
-                                <option>6L</option>
-                                <option>7S</option>
-                                <option>7L</option>
+                                <option>Chr1</option>
+                                <option>Chr2</option>
+                                <option>Chr3</option>
+                                <option>Chr4</option>
+                                <option>Chr5</option>
+                                <option>Chr6</option>
+                                <option>Chr7</option>
                               </select>
                           </div>
                       </div>
+                      <div class="col-sm"></div>
                       <div class="col-sm">
                           <label for="spos">Position (bp):</label><br>
                           <input type="number" id="spos" placeholder=0>
-                      </div>
-                      <div class="col-sm">
-                          <label for="ipos">Click to fetch Rt:</label><br>
-                          <input id="fetchirt_s" type="button" class="btn btn-default" value="Fetch Rt" onclick="fetchrts()" />
-                      </div>
-                      <div class="col-sm">
-                          <label for="srr">Recombination rate:</label><br>
-                          <input type="number" id="srr" placeholder=0>
                       </div>
                   </div>
                   <div class="row" >
@@ -142,6 +114,7 @@
     <script src="./js/bootstrap.js"></script>
     <script src="./js/poly_scores.js"></script>
     <script src="./js/ztab.js"></script>
+    <script src="./js/rr.js"></script>
     <script src="./js/compute_p_val.js"></script>
   </body>
 </html>
