@@ -41,9 +41,9 @@ function getRrArray(chri, ipos, spos){
     const chrdata = rr[chri];
     const dist_i = [];  // array to hold absolute distance
     const dist_s = [];
-    for(let i=0; i<chrdata['Gene_start'].length; i++){
-        dist_i.push(Math.abs(chrdata['Gene_start'][i]-ipos));
-        dist_s.push(Math.abs(chrdata['Gene_start'][i]-spos));
+    for(let i=0; i<chrdata['position'].length; i++){
+        dist_i.push(Math.abs(chrdata['position'][i]-ipos));
+        dist_s.push(Math.abs(chrdata['position'][i]-spos));
     }
     const arrMin_i = Math.min.apply(null, dist_i); // get minimum of dist array
     const arrMin_s = Math.min.apply(null, dist_s);
