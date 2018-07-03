@@ -28,74 +28,85 @@
       <div class="container">
           <div class="card text-center">
               <div class="card-body">
-                <h6 class="card-title">Enter the details of Identified QTL</h6>
-                  <div class="row">
-                      <div class="col-sm">
-                          <div class="form-group">
-                              <label for="chri">Select a chromosome</label>
-                              <select class="form-control chri" id="chri">
-                                <option>Chr1</option>
-                                <option>Chr2</option>
-                                <option>Chr3</option>
-                                <option>Chr4</option>
-                                <option>Chr5</option>
-                                <option>Chr6</option>
-                                <option>Chr7</option>
-                              </select>
-                          </div>
-                      </div>
-                      <div class="col-sm"></div>
-                      <div class="col-sm">
-                          <label for="ipos">Position (bp):</label><br>
-                          <input type="number" id="ipos" placeholder=0>
-                      </div>
-                  </div>
-                  <div class="row" >
-                      <div class="col-sm" id="i_error"></div>
-                  </div>
-                  <hr>
-                  <h6 class="card-title">Enter the details of Selected QTL</h6>
-                  <div class="row">
-                      <div class="col-sm">
-                          <div class="form-group">
-                              <label for="chrs">Select a chromosome</label>
-                              <select class="form-control" id="chrs">
-                                <option>Chr1</option>
-                                <option>Chr2</option>
-                                <option>Chr3</option>
-                                <option>Chr4</option>
-                                <option>Chr5</option>
-                                <option>Chr6</option>
-                                <option>Chr7</option>
-                              </select>
-                          </div>
-                      </div>
-                      <div class="col-sm"></div>
-                      <div class="col-sm">
-                          <label for="spos">Position (bp):</label><br>
-                          <input type="number" id="spos" placeholder=0>
-                      </div>
-                  </div>
-                  <div class="row" >
-                      <div class="col-sm" id="s_error"></div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                      <div class="col-sm">
-                          <input id="computepvalue" type="button" class="btn btn-primary" value="Compute p-value" onclick="computepval()" />
-                      </div>
-                  </div>
+                  <ul class="nav nav-tabs" id="myTab" role="tablist">
+                      <li class="nav-item">
+                        <a class="nav-link active" id="t1-tab" data-toggle="tab" href="#t1" role="tab" aria-controls="t1" aria-selected="true">Test 1: QTL vs QTL</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Test 2: QTL vs QTLs</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Test 3: QTL vs Gene</a>
+                      </li>
+                  </ul>
                   <br>
-                  <div class="row">
-                      <div class="col-sm">
-                          <p>p-value:</p>
-                          <p id="pval"></p>
+                  <div class="tab-content" id="myTabContent">
+                      <div class="tab-pane fade show active" id="t1" role="tabpanel" aria-labelledby="t1-tab">
+                        <h6 class="card-title">Enter the details of Identified QTL</h6>
+                          <div class="row">
+                              <div class="col-sm">
+                                  <div class="form-group">
+                                      <label for="chri">Select a chromosome</label>
+                                      <select class="form-control chri" id="chri">
+                                        <option>Chr1</option>
+                                        <option>Chr2</option>
+                                        <option>Chr3</option>
+                                        <option>Chr4</option>
+                                        <option>Chr5</option>
+                                        <option>Chr6</option>
+                                        <option>Chr7</option>
+                                      </select>
+                                  </div>
+                              </div>
+                              <div class="col-sm"></div>
+                              <div class="col-sm">
+                                  <label for="ipos">Position (bp):</label><br>
+                                  <input type="number" id="ipos" placeholder=0>
+                              </div>
+                          </div>
+                          <hr>
+                          <h6 class="card-title">Enter the details of Selected QTL</h6>
+                          <div class="row">
+                              <div class="col-sm">
+                                  <div class="form-group">
+                                      <label for="chrs">Select a chromosome</label>
+                                      <select class="form-control" id="chrs">
+                                        <option>Chr1</option>
+                                        <option>Chr2</option>
+                                        <option>Chr3</option>
+                                        <option>Chr4</option>
+                                        <option>Chr5</option>
+                                        <option>Chr6</option>
+                                        <option>Chr7</option>
+                                      </select>
+                                  </div>
+                              </div>
+                              <div class="col-sm"></div>
+                              <div class="col-sm">
+                                  <label for="spos">Position (bp):</label><br>
+                                  <input type="number" id="spos" placeholder=0>
+                              </div>
+                          </div>
+                          <hr>
+                          <div class="row">
+                              <div class="col-sm">
+                                  <input id="computepvalue" type="button" class="btn btn-primary" value="Compute p-value" onclick="computepval()" />
+                              </div>
+                          </div>
+                          <br>
+                          <div class="row">
+                              <div class="col-sm">
+                                  <p>p-value:</p>
+                                  <p id="pval"></p>
+                              </div>
+                          </div>
                       </div>
+                      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+                      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
                   </div>
               </div>
           </div>
       </div>
-  </div>
 
 
 

@@ -1,5 +1,5 @@
-const alpha = 3.656;
-const beta = -1.089;
+const alpha = 3.884;
+const beta = -1.523;
 document.getElementById("ipos").value = 20395218;
 document.getElementById("spos").value = 61502257;
 
@@ -17,12 +17,18 @@ $("#chrs").change(function () {
   })
   .change();
 
+// function to calculate average
+function calculateAverage(inArray){
+    let sum = 0;
+    for( let i = 0; i < inArray.length; i++ ){
+        sum += inArray[i];
+    }
 
-// function to check weather user entered marker position is within the range or not
-function checkChrPositions(){
-    const chri = document.getElementById("chri").value;
-    const ipos = document.getElementById("ipos").value;
-    const spos = document.getElementById("spos").value;
+    return sum/inArray.length;
+}
+
+// function to check wheather user entered marker position is within the range or not
+function checkChrPositions(chri, ipos, spos){
     if((ipos<=chrSize[chri]) && (spos<=chrSize[chri])){
         return 'go';
     } else {
@@ -31,14 +37,11 @@ function checkChrPositions(){
 }
 
 // function to get Recombination rates between two selected QTLs
-function getRrArray(){
-    const chri = document.getElementById("chri").value;
-    const ipos = document.getElementById("ipos").value;
-    const spos = document.getElementById("spos").value;
+function getRrArray(chri, ipos, spos){
     const chrdata = rr[chri];
     const dist_i = [];  // array to hold absolute distance
     const dist_s = [];
-    for(i=0;i<chrdata['Gene_start'].length;i++){
+    for(let i=0; i<chrdata['Gene_start'].length; i++){
         dist_i.push(Math.abs(chrdata['Gene_start'][i]-ipos));
         dist_s.push(Math.abs(chrdata['Gene_start'][i]-spos));
     }
@@ -58,25 +61,6 @@ function getRrArray(){
     return getRrSlice(chrdata, arrMinPos_i, arrMinPos_s);
 }
 
-// Calculates Sigma from the array from getRrArray function
-function calculateSigma(aray){
-    if (aray.length === 1){
-        return Math.exp(alpha + (beta * aray[0]))
-    } else{
-        //let sigma_aray = []; //array to store sigma values
-        //for (i=0; i<aray.length; i++){
-        //    sigma_aray.push(alpha + (beta * aray[i]));
-        //}
-        let sigma_total = 0;
-        for (i=0; i<aray.length; i++){ //calculating mean value for the sigma array
-            sigma_total+=aray[i];
-        }
-        let rr_mean = sigma_total/aray.length;  
-        return Math.exp(alpha + (beta * rr_mean));
-    }
-
-}
-
 
 //function to calculate p value as explained in the paper
 function computepval(){
@@ -84,14 +68,13 @@ function computepval(){
     let ipos = document.getElementById("ipos").value;
     let spos = document.getElementById("spos").value;
     console.log('Chr:', chr, 'Position_i:', ipos, "Position_s:", spos);
-    if (checkChrPositions() === 'go'){
-        const rr_array = getRrArray();
+    if (checkChrPositions(chr, ipos, spos) === 'go'){
+        const rr_array = getRrArray(chr, ipos, spos);
         console.log("aray", rr_array);
-        const temp = calculateSigma(rr_array);
-        //let sigma = Math.exp(temp);
-        console.log("sigma", temp);
+        const sigma = Math.exp(alpha + (beta * calculateAverage(rr_array)));
+        console.log("sigma", sigma);
         let dif = Math.abs((parseFloat(ipos) / 1000000) - (parseFloat(spos) / 1000000));
-        let phi_func = dif / (Math.sqrt(2) * temp);
+        let phi_func = dif / (Math.sqrt(2) * sigma);
         console.log("phifunc", phi_func);
         let pval = 2 * (1 - zscorecal(phi_func));
         console.log("p-value", pval);
