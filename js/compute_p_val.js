@@ -63,15 +63,16 @@ function calculateSigma(aray){
     if (aray.length === 1){
         return Math.exp(alpha + (beta * aray[0]))
     } else{
-        let sigma_aray = []; //array to store sigma values
-        for (i=0; i<aray.length; i++){
-            sigma_aray.push(Math.exp(alpha + (beta * aray[i])));
-        }
+        //let sigma_aray = []; //array to store sigma values
+        //for (i=0; i<aray.length; i++){
+        //    sigma_aray.push(alpha + (beta * aray[i]));
+        //}
         let sigma_total = 0;
-        for (i=0; i<sigma_aray.length; i++){ //calculating mean value for the sigma array
-            sigma_total+=sigma_aray[i];
+        for (i=0; i<aray.length; i++){ //calculating mean value for the sigma array
+            sigma_total+=aray[i];
         }
-        return sigma_total/sigma_aray.length;
+        let rr_mean = sigma_total/sigma_aray.length;  
+        return Math.exp(alpha + (beta * rr_mean));
     }
 
 }
