@@ -1,5 +1,5 @@
-const alpha = 3.884;
-const beta = -1.523;
+const alpha = 3.656;
+const beta = -1.089;
 document.getElementById("ipos").value = 20395218;
 document.getElementById("spos").value = 61502257;
 
@@ -72,9 +72,9 @@ function calculateSigmaAverage(rr_array){
 
 //function to calculate p value as explained in the paper
 function computepval(){
-    let chr = document.getElementById("chri").value;
-    let ipos = document.getElementById("ipos").value;
-    let spos = document.getElementById("spos").value;
+    const chr = document.getElementById("chri").value;
+    const ipos = document.getElementById("ipos").value;
+    const spos = document.getElementById("spos").value;
     console.log('Chr:', chr, 'Position_i:', ipos, "Position_s:", spos);
     if (checkChrPositions(chr, ipos, spos) === 'go'){
         const rr_array = getRrArray(chr, ipos, spos);
@@ -87,7 +87,7 @@ function computepval(){
         let pval = 2 * (1 - zscorecal(phi_func));
         console.log("p-value", pval);
         document.getElementById("pval").innerHTML = pval;
-    } else{
+    } else {
         document.getElementById("pval").innerHTML = "Wrong marker position entered";
     }
 
