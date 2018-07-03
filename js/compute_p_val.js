@@ -61,6 +61,14 @@ function getRrArray(chri, ipos, spos){
     return getRrSlice(chrdata, arrMinPos_i, arrMinPos_s);
 }
 
+// function to calculate sigma from an array of recombination rate
+function calculateSigmaAverage(rr_array){
+    let sigma_array = [];
+    for (let i=0; i<rr_array.length; i++){
+        sigma_array.push(Math.exp(alpha + (beta * rr_array[i])))
+    }
+    return calculateAverage(sigma_array);
+}
 
 //function to calculate p value as explained in the paper
 function computepval(){
@@ -71,7 +79,7 @@ function computepval(){
     if (checkChrPositions(chr, ipos, spos) === 'go'){
         const rr_array = getRrArray(chr, ipos, spos);
         console.log("aray", rr_array);
-        const sigma = Math.exp(alpha + (beta * calculateAverage(rr_array)));
+        const sigma = calculateSigmaAverage(rr_array);
         console.log("sigma", sigma);
         let dif = Math.abs((parseFloat(ipos) / 1000000) - (parseFloat(spos) / 1000000));
         let phi_func = dif / (Math.sqrt(2) * sigma);
