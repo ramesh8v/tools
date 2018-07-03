@@ -71,7 +71,7 @@ function calculateSigma(aray){
         for (i=0; i<aray.length; i++){ //calculating mean value for the sigma array
             sigma_total+=aray[i];
         }
-        let rr_mean = sigma_total/sigma_aray.length;  
+        let rr_mean = sigma_total/aray.length;  
         return Math.exp(alpha + (beta * rr_mean));
     }
 
