@@ -70,7 +70,7 @@ function calculateSigmaAverage(rr_array){
     return calculateAverage(sigma_array);
 }
 
-//function to calculate p value as explained in the paper
+//function to calculate p value for the test one
 function computepval(){
     const chr = document.getElementById("chri").value;
     const ipos = document.getElementById("ipos").value;
