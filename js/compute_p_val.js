@@ -1,7 +1,7 @@
 const alpha = 3.656;
 const beta = -1.089;
-document.getElementById("ipos").value = 1;
-document.getElementById("spos").value = 1;
+document.getElementById("ipos").value = 20395218;
+document.getElementById("spos").value = 61502257;
 
 // Size of chromosomes
 const chrSize = {'Chr1':502310573, 'Chr2':651642770, 'Chr3':627112410, 'Chr4':525901714, 'Chr5':577254575, 'Chr6':495946541, 'Chr7':644563824};
