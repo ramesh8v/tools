@@ -62,15 +62,6 @@ function calculateSigmaAverage(rr_array){
 document.getElementById("t1_ipos").value = 20395218;
 document.getElementById("t1_spos").value = 61502257;
 
-//// Change selected chromosome name based on identified chromosome name
-$("#t1_chri").change(function () {
-      document.getElementById("t1_chrs").value = document.getElementById("t1_chri").value;
-  }).change();
-//// Change identified chromosome name based on selected chromosome name
-$("#t1_chrs").change(function () {
-      document.getElementById("t1_chri").value = document.getElementById("t1_chrs").value;
-  }).change();
-
 //// function to calculate p value for the test one
 function t1_computepval(){
     const t1_chr = document.getElementById("t1_chri").value;
@@ -96,14 +87,6 @@ function t1_computepval(){
 //////////////////// code for tab 2 ////////////////////////////
 document.getElementById("t2_ipos").value = 20395218;
 document.getElementById("t2_spos").value = "41502257,51502257,61502257";
-// Change selected chromosome name based on identified chromosome name
-$("#t2_chri").change(function () {
-      document.getElementById("t2_chrs").value = document.getElementById("t2_chri").value;
-  }).change();
-// Change identified chromosome name based on selected chromosome name
-$("#t2_chrs").change(function () {
-      document.getElementById("t2_chri").value = document.getElementById("t2_chrs").value;
-  }).change();
 
 function t2_computepval(){
     const t2_chr = document.getElementById("t2_chri").value;
@@ -138,14 +121,6 @@ function t2_computepval(){
 /////////////// code for tab 3 ////////////////////////
 document.getElementById("t3_ipos").value = 20395218;
 document.getElementById("t3_spos").value = 61502257;
-// Change selected chromosome name based on identified chromosome name
-$("#t3_chri").change(function () {
-      document.getElementById("t3_chrs").value = document.getElementById("t3_chri").value;
-  }).change();
-// Change identified chromosome name based on selected chromosome name
-$("#t3_chrs").change(function () {
-      document.getElementById("t3_chri").value = document.getElementById("t3_chrs").value;
-  }).change();
 
 function t3_computepval(){
     const t3_chr = document.getElementById("t3_chri").value;
